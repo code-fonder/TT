@@ -1,0 +1,1735 @@
+CODE:
+
+main
+
+// ignore_for_file: prefer_const_constructors
+
+import 'package:boekiez/screens.dart/splashscreen.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Bookfores",
+        home: splashscreen(),
+      )
+    );
+  }
+}
+adventure
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+import '../screens.dart/bookloading.dart';
+
+class adventure extends StatefulWidget {
+  var c4;
+  adventure({@required this.c4});
+
+  @override
+  State<adventure> createState() => _adventureState();
+}
+
+class _adventureState extends State<adventure> {
+  String st(String s) {
+    int count = 0;
+    String ans = "";
+    for (int i = 0; i < s.length; i++) {
+      if (count == 3) {
+        break;
+      }
+      if (s[i] == ' ') {
+        count++;
+      }
+      ans = ans + s[i];
+    }
+    return ans + "...";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Container(
+      height: 270,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 9,
+          itemBuilder: (context, index) {
+            return (Container(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return bookloading(
+                              c: widget.c4["items"][index + 1]["volumeInfo"]
+                                  ["industryIdentifiers"][0]["identifier"]);
+                        }));
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 230,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 8,
+                              offset: Offset(2, 2))
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: NetworkImage(widget.c4["items"]
+                                          [index + 1]["volumeInfo"]
+                                      ["imageLinks"]["thumbnail"]),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            (widget.c4["items"][index + 1]["volumeInfo"]
+                                            ["title"])
+                                        .length >
+                                    20
+                                ? st(widget.c4["items"][index + 1]["volumeInfo"]
+                                    ["title"])
+                                : widget.c4["items"][index + 1]["volumeInfo"]
+                                    ["title"],
+                            style: TextStyle(
+                                color: Colors.grey[900],
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ));
+          }),
+    ));
+  }
+}
+fantasy
+import 'package:boekiez/screens.dart/bookloading.dart';
+import 'package:boekiez/screens.dart/error.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+class fantasy extends StatefulWidget {
+  var c2;
+  fantasy({@required this.c2});
+
+  @override
+  State<fantasy> createState() => _fantasyState();
+}
+
+class _fantasyState extends State<fantasy> {
+  String st(String s) {
+    int count = 0;
+    String ans = "";
+    for (int i = 0; i < s.length; i++) {
+      if (count == 3) {
+        break;
+      }
+      if (s[i] == ' ') {
+        count++;
+      }
+      ans = ans + s[i];
+    }
+    return ans + "...";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Container(
+      height: 270,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 9,
+          itemBuilder: (context, index) {
+            return (Container(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          try {
+                            return bookloading(
+                                c: widget.c2["items"][index + 1]["volumeInfo"]
+                                    ["industryIdentifiers"][0]["identifier"]);
+                          } catch (e) {
+                            return error();
+                          }
+                        }));
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 230,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: NetworkImage(widget.c2["items"]
+                                          [index + 1]["volumeInfo"]
+                                      ["imageLinks"]["thumbnail"]),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            (widget.c2["items"][index + 1]["volumeInfo"]
+                                            ["title"])
+                                        .length >
+                                    20
+                                ? st(widget.c2["items"][index + 1]["volumeInfo"]
+                                    ["title"])
+                                : widget.c2["items"][index + 1]["volumeInfo"]
+                                    ["title"],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[900]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ));
+          }),
+    ));
+  }
+}
+health
+import 'package:boekiez/screens.dart/bookloading.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+class romance extends StatefulWidget {
+  var c4;
+
+  romance({@required this.c4});
+
+  @override
+  State<romance> createState() => _romanceState();
+}
+
+class _romanceState extends State<romance> {
+  String st(String s) {
+    int count = 0;
+    String ans = "";
+    for (int i = 0; i < s.length; i++) {
+      if (count == 3) {
+        break;
+      }
+      if (s[i] == ' ') {
+        count++;
+      }
+      ans = ans + s[i];
+    }
+    return ans + "...";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Container(
+      height: 270,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 9,
+          itemBuilder: (context, index) {
+            return (Container(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return bookloading(
+                              c: widget.c4["items"][index + 1]["volumeInfo"]
+                                  ["industryIdentifiers"][0]["identifier"]);
+                        }));
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 230,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: NetworkImage(widget.c4["items"]
+                                          [index + 1]["volumeInfo"]
+                                      ["imageLinks"]["thumbnail"]),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            (widget.c4["items"][index + 1]["volumeInfo"]
+                                            ["title"])
+                                        .length >
+                                    20
+                                ? st(widget.c4["items"][index + 1]["volumeInfo"]
+                                    ["title"])
+                                : widget.c4["items"][index + 1]["volumeInfo"]
+                                    ["title"],
+                            style: TextStyle(
+                                color: Colors.grey[900],
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ));
+          }),
+    ));
+  }
+}
+horror
+
+// ignore_for_file: prefer_const_constructors
+
+import 'package:boekiez/screens.dart/bookloading.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+class horror extends StatefulWidget {
+  var c3;
+  horror({@required this.c3});
+  @override
+  State<horror> createState() => _horrorState();
+}
+
+class _horrorState extends State<horror> {
+  String st(String s) {
+    int count = 0;
+    String ans = "";
+    for (int i = 0; i < s.length; i++) {
+      if (count == 3) {
+        break;
+      }
+      if (s[i] == ' ') {
+        count++;
+      }
+      ans = ans + s[i];
+    }
+    return ans + "...";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Container(
+      height: 270,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 9,
+          itemBuilder: (context, index) {
+            return (Container(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return bookloading(
+                              c: widget.c3["items"][index + 1]["volumeInfo"]
+                                  ["industryIdentifiers"][0]["identifier"]);
+                        }));
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 230,
+                            width: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: NetworkImage(widget.c3["items"]
+                                          [index + 1]["volumeInfo"]
+                                      ["imageLinks"]["thumbnail"]),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            (widget.c3["items"][index + 1]["volumeInfo"]
+                                            ["title"])
+                                        .length >
+                                    20
+                                ? st(widget.c3["items"][index + 1]["volumeInfo"]
+                                    ["title"])
+                                : widget.c3["items"][index + 1]["volumeInfo"]
+                                    ["title"],
+                            style: TextStyle(
+                                color: Colors.grey[900],
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ));
+          }),
+    ));
+  }
+}
+bookdisplay
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings, deprecated_member_use, use_full_hex_values_for_flutter_colors
+
+import 'dart:io' as i;
+import 'package:boekiez/screens.dart/homescreen.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+class bookdisplay extends StatefulWidget {
+  var d;
+  bookdisplay({@required this.d});
+
+  @override
+  State<bookdisplay> createState() => _bookdisplayState();
+}
+
+class _bookdisplayState extends State<bookdisplay> {
+  var pagecount = "Not available";
+  var desc = "Not available";
+  var pubdate = "Not available";
+  var lang = "Not available";
+  var rating = "Not available";
+  var url =
+      "https://www.bing.com/images/search?view=detailV2&ccid=vx9%2fIUj5&id=3B7650A146D55682645F765E60E786419299154C&thid=OIP.vx9_IUj50utS7cbaiRtoZAHaE8&mediaurl=https%3a%2f%2fst3.depositphotos.com%2f1186248%2f14351%2fi%2f950%2fdepositphotos_143511907-stock-photo-not-available-rubber-stamp.jpg&exph=682&expw=1023&q=not+available&simid=608054098357136066&FORM=IRPRST&ck=BADF0353AC59677CCFAA67227357E3CB&selectedIndex=1&ajaxhist=0&ajaxserp=0";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getpagecount();
+    getdesc();
+    getpubdate();
+    geturl();
+  }
+
+  geturl() {
+    try {
+      url = widget.d["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"];
+    } catch (e) {
+      url = widget.d["items"][1]["volumeInfo"]["imageLinks"]["thumbnail"];
+          ;
+    }
+  }
+
+  getlang() {
+    try {
+      setState(() {
+        lang = widget.d["items"][0]["volumeInfo"]["language"]
+            .toString()
+            .toUpperCase();
+      });
+    } catch (e) {
+      setState(() {
+        lang = "Not available";
+      });
+    }
+  }
+
+  void getpubdate() {
+    try {
+      setState(() {
+        pubdate =
+            widget.d["items"][0]["volumeInfo"]["publishedDate"].toString();
+      });
+    } catch (e) {
+      setState(() {
+        pubdate = "Not available";
+      });
+    }
+  }
+
+  void getdesc() {
+    try {
+      setState(() {
+        desc = widget.d["items"][0]["volumeInfo"]["description"];
+      });
+    } catch (e) {
+      setState(() {
+        desc = "Not available";
+      });
+    }
+  }
+
+  void getpagecount() {
+    try {
+      setState(() {
+        pagecount = widget.d["items"][0]["volumeInfo"]["pageCount"].toString();
+      });
+    } catch (e) {
+      setState(() {
+        pagecount = "Not available";
+      });
+    }
+  }
+
+  void getrating() {
+    try {
+      setState(() {
+        rating = widget.d["items"][0]["volumeInfo"]["averageRating"].toString();
+      });
+    } catch (e) {
+      setState(() {
+        rating = "Not available";
+      });
+    }
+  }
+
+  Future openfile(var url, var title) async {
+    final file = await downloadfile(url, title!);
+    if (file == null) {
+      print("null");
+      return;
+    }
+    print(file.path);
+    OpenFile.open(file.path);
+  }
+
+  Future<i.File?> downloadfile(var url, var filename) async {
+    try {
+      var appstorage = await getApplicationDocumentsDirectory();
+      // ignore: unused_local_variable
+      final file = i.File('${appstorage.path}/filename');
+      final Response = await Dio().get(url,
+          options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+            receiveTimeout: 0,
+          ));
+      final raf = file.openSync(mode: i.FileMode.write);
+      raf.writeFromSync(Response.data);
+      await raf.close();
+
+      return file;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Scaffold(
+      backgroundColor: Color(0xfff012ac0),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 25.0),
+        child: RaisedButton(
+          onPressed: () async {
+            await launchUrl(
+                Uri.parse(widget.d["items"][0]["accessInfo"]["webReaderLink"]));
+          },
+          splashColor: Colors.grey,
+          color: Colors.black,
+          child: Text(
+            "READ BOOK",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        opacity: 0.4,
+                        image: AssetImage("assets/overlay.png"),
+                        fit: BoxFit.cover)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                          ..pop()
+                          ..pop();
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                    Text(
+                      "DETAILS",
+                      style: GoogleFonts.lato(
+                          textStyle:
+                              TextStyle(color: Colors.white, fontSize: 16)),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        try {
+                          var url = widget.d["items"][0]["accessInfo"]["epub"]
+                              ["isAvailable"];
+                          if (url == true) {
+                            url = widget.d["items"][0]["accessInfo"]["epub"]
+                                ["acsTokenLink"];
+                            await launchUrl(Uri.parse(url));
+                          }
+                        } catch (e) {
+                          print("Not available");
+                        }
+                      },
+                      child: Icon(
+                        Icons.download_outlined,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+                flex: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          opacity: 0.4,
+                          image: AssetImage("assets/overlay.png"),
+                          fit: BoxFit.cover)),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 230,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                  url,
+                                ),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          widget.d["items"][0]["volumeInfo"]["title"],
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 23,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                        Text(
+                          "by " +
+                              widget.d["items"][0]["volumeInfo"]["authors"][0],
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  fontSize: 15, color: Colors.grey[400])),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                Text(
+                                  "Rating",
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.grey[400])),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  rating,
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white)),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "Pages",
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.grey[400])),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  pagecount,
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white)),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "Language",
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.grey[400])),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  lang,
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Colors.white)),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "Publish date",
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.grey[400])),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  pubdate.toUpperCase(),
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          color: Colors.white)),
+                                )
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                )),
+            Expanded(
+                flex: 2,
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.white),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 28.0, vertical: 25),
+                        child: ListView(
+                          children: [
+                            Text(
+                              "What's it about?",
+                              style: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                color: Colors.grey[900],
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                              )),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              desc,
+                              style: GoogleFonts.lato(
+                                  color: Colors.grey[600], fontSize: 15),
+                            )
+                          ],
+                        ),
+                      ))
+                    ],
+                  ),
+                )),
+          ],
+        ),
+      ),
+    ));
+  }
+}
+bookloading
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:convert';
+
+import 'package:boekiez/screens.dart/bookdisplay.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart';
+
+class bookloading extends StatefulWidget {
+  var c;
+  bookloading({@required this.c});
+
+  @override
+  State<bookloading> createState() => _bookloadingState();
+}
+
+class _bookloadingState extends State<bookloading> {
+  var c2;
+
+  @override
+  void initState() {
+    print(widget.c);
+    // TODO: implement initState
+    super.initState();
+    getdata();
+  }
+
+  void getdata() async {
+    try {
+      Response r = await get(Uri.parse(
+          "https://www.googleapis.com/books/v1/volumes?q=isbn:${widget.c}&key=AIzaSyAqxw3nnCxwNQXRmXb-ZFi8FTNyhz6kwGA"));
+      c2 = jsonDecode(r.body);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return bookdisplay(d: c2);
+      }));
+    } catch (e) {
+      print("error");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    ));
+  }
+}
+---------
+error.dart
+
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+class error extends StatefulWidget {
+  const error({Key? key}) : super(key: key);
+
+  @override
+  State<error> createState() => _errorState();
+}
+
+class _errorState extends State<error> {
+  @override
+  Widget build(BuildContext context) {
+    return(
+      Scaffold(
+        body: Center(
+          child: Text("Error"),
+        ),
+      )
+    );
+  }}
+Homescreen
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+
+import 'package:boekiez/category/fantasy.dart';
+import 'package:boekiez/category/horror.dart';
+import 'package:boekiez/category/health.dart';
+import 'package:boekiez/category/adventure.dart';
+import 'package:boekiez/screens.dart/bookloading.dart';
+import 'package:boekiez/screens.dart/search_loadind.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class homescreen extends StatefulWidget {
+  var c1;
+  var c2;
+  var c3;
+  var c4;
+
+  homescreen(
+      {@required this.c1,
+      @required this.c2,
+      @required this.c3,
+      @required this.c4});
+
+  @override
+  State<homescreen> createState() => _homescreenState();
+}
+
+class _homescreenState extends State<homescreen> {
+  TextEditingController t = TextEditingController();
+
+  String st(String s) {
+    int count = 0;
+    String ans = "";
+    for (int i = 0; i < s.length; i++) {
+      if (count == 3) {
+        break;
+      }
+      if (s[i] == ' ') {
+        count++;
+      }
+      ans = ans + s[i];
+    }
+    return ans + "...";
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.c1);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Scaffold(
+      resizeToAvoidBottomInset : false,
+      backgroundColor: Color(0xfff012AC0),
+      body: SafeArea(
+          child: Column(
+                children: [
+          Container(
+            decoration: BoxDecoration(
+                    image: DecorationImage(
+                      opacity: 0.4,
+                      image: AssetImage("assets/overlay.png"),
+                      fit: BoxFit.cover
+
+                      )
+                  ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+              child: Row(
+                children: [
+                  GestureDetector(
+                      onTap: (() {
+                        Navigator.of(context)
+                          ..pop()
+                          ..pop();
+                      }),
+                      child:
+                          Icon(Icons.arrow_back, size: 30, color: Colors.white))
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "assets/back.png",
+                      ),
+                      fit: BoxFit.cover)),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                      child: Container(
+                        height: 40,
+                        child: TextField(
+                          controller: t,
+                          decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              contentPadding: EdgeInsets.all(10),
+                              hintText: "Search Book...",
+                              prefixIcon: Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(40))),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return searchloading(text: t.text);
+                        }));
+                      },
+                      splashColor: Color(0xfff012AC0),
+                      color: Colors.white,
+                      child: Text(
+                        "SEARCH",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("Explore the book forest!",
+                        style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold))),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Find the light you are chasing for.",
+                      style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                              fontSize: 13,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+              flex: 2,
+              child: Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Container(
+                            child: ListView(
+                                            children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              Text(
+                                "Adventure",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Icon(Icons.arrow_forward)
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        adventure(c4: widget.c1),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              Text(
+                                "Fantasy",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Icon(Icons.arrow_forward)
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        fantasy(c2: widget.c2),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              Text(
+                                "Horror",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Icon(Icons.arrow_forward)
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        horror(c3: widget.c3),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              Text(
+                                "Health",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Icon(Icons.arrow_forward)
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        romance(c4: widget.c4),
+                                            ],
+                                          )))
+                  ],
+                ),
+              ))
+                ],
+              )),
+    ));
+  }
+}
+loadingscreen
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
+import 'dart:convert';
+
+import 'package:boekiez/screens.dart/homescreen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart';
+
+class loadingscreen extends StatefulWidget {
+  var l;
+  loadingscreen({@required this.l});
+
+  @override
+  State<loadingscreen> createState() => _loadingscreenState();
+}
+
+class _loadingscreenState extends State<loadingscreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController c;
+  var c1;
+  var c2;
+  var c3;
+  var c4;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getcategorydata();
+    
+  }
+
+  void getcategorydata() async {
+    Response r1 = await get(Uri.parse(
+        "https://www.googleapis.com/books/v1/volumes?q=subject:thriller&download=epub&orderBy=newest&key=AIzaSyAqxw3nnCxwNQXRmXb-ZFi8FTNyhz6kwGA"));
+    Response r2 = await get(Uri.parse(
+        "https://www.googleapis.com/books/v1/volumes?q=subject:fantasy&download=epub&orderBy=newest&key=AIzaSyAqxw3nnCxwNQXRmXb-ZFi8FTNyhz6kwGA"));
+    Response r3 = await get(Uri.parse(
+        "https://www.googleapis.com/books/v1/volumes?q=subject:horror&download=epub&orderBy=newest&key=AIzaSyAqxw3nnCxwNQXRmXb-ZFi8FTNyhz6kwGA"));
+    Response r4 = await get(Uri.parse(
+        "https://www.googleapis.com/books/v1/volumes?q=subject:health&download=epub&orderBy=newest&key=AIzaSyAqxw3nnCxwNQXRmXb-ZFi8FTNyhz6kwGA"));
+    c1 = jsonDecode(r1.body);
+    c2 = jsonDecode(r2.body);
+    c3 = jsonDecode(r3.body);
+    c4 = jsonDecode(r4.body);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return homescreen(c1: c1, c2: c2, c3: c3, c4: c4);
+    }));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child:CircularProgressIndicator(
+                color: Colors.black,
+              )
+            )
+          ],
+        ),
+      ),
+    ));
+  }
+}
+searchfilter
+
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
+
+import 'package:boekiez/screens.dart/bookloading.dart';
+import 'package:boekiez/screens.dart/error.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class searchfilter extends StatefulWidget {
+  var d;
+  searchfilter({@required this.d});
+
+  @override
+  State<searchfilter> createState() => _searchfilterState();
+}
+
+class _searchfilterState extends State<searchfilter> {
+  var isbn;
+
+  getisbn(int index) {
+    try {
+      setState(() {
+        isbn = widget.d["items"][index + 1]["volumeInfo"]["industryIdentifiers"]
+            [0]["identifier"];
+      });
+    } catch (e) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return error();
+      }));
+    }
+  }
+
+  String st(String s) {
+    int count = 0;
+    String ans = "";
+    for (int i = 0; i < s.length; i++) {
+      if (count == 20) {
+        break;
+      }
+      count++;
+      ans = ans + s[i];
+    }
+    return ans + "...";
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Container(
+              color: Colors.black,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                          ..pop()
+                          ..pop();
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      "RESULT",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                    Text(
+                      "..",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: widget.d["items"].length - 1,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 10),
+                      child: (Container(
+                        padding: EdgeInsets.all(10),
+                        height: 270,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Color(0xfff012AC0),
+                            image: DecorationImage(
+                                opacity: 0.4,
+                                image: AssetImage("assets/overlay.png"),
+                                fit: BoxFit.cover)),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 210,
+                              width: 140,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                      image: NetworkImage(widget.d["items"]
+                                              [index + 1]["volumeInfo"]
+                                          ["imageLinks"]["thumbnail"]),
+                                      fit: BoxFit.cover)),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 25,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    // you can change it accordingly
+
+                                    (widget.d["items"][index + 1]["volumeInfo"]
+                                                    ["title"])
+                                                .length >
+                                            20
+                                        ? st(widget.d["items"][index + 1]
+                                            ["volumeInfo"]["title"])
+                                        : widget.d["items"][index + 1]
+                                            ["volumeInfo"]["title"],
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    (widget.d["items"][index + 1]["volumeInfo"]
+                                                    ["authors"][0])
+                                                .length >
+                                            20
+                                        ? "by " +
+                                            st(widget.d["items"][index + 1]
+                                                ["volumeInfo"]["authors"][0])
+                                        : "by " +
+                                            widget.d["items"][index + 1]
+                                                ["volumeInfo"]["authors"][0],
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[400],
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Page Count:- " +
+                                      (widget.d["items"][index + 1]
+                                              ["volumeInfo"]["pageCount"]
+                                          .toString()),
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          color: Colors.grey[400],
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  (widget.d["items"][index + 1]["volumeInfo"]
+                                              ["averageRating"]) ==
+                                          null
+                                      ? "⭐ " + "Not rating available"
+                                      : "⭐ " +
+                                          (widget.d["items"][index + 1]
+                                                  ["volumeInfo"]
+                                                  ["averageRating"]
+                                              .toString()),
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          color: Colors.grey[400],
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                RaisedButton(
+                                  onPressed: () {
+                                    getisbn(index);
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return bookloading(c: isbn);
+                                    }));
+                                  },
+                                  color: Colors.black,
+                                  child: Text(
+                                    "DETAILS",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                    );
+                  }),
+            )
+          ],
+        ),
+      ),
+    ));
+  }
+}
+
+searchloading
+
+import 'dart:convert';
+
+import 'package:boekiez/screens.dart/search_filter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart';
+
+class searchloading extends StatefulWidget {
+  var text;
+  searchloading({@required this.text});
+
+  @override
+  State<searchloading> createState() => _searchloadingState();
+}
+
+class _searchloadingState extends State<searchloading> {
+  var cp;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getdata();
+  }
+
+  void getdata() async {
+    Response r = await get(
+      Uri.parse(
+          "https://www.googleapis.com/books/v1/volumes?q=intitle:${widget.text}&maxResult=40&download=epub&orderBy=newest&key=AIzaSyAqxw3nnCxwNQXRmXb-ZFi8FTNyhz6kwGA"),
+    );
+
+    cp = jsonDecode(r.body);
+    print(cp);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return searchfilter(d: cp);
+    }));
+    return;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return (const Scaffold(
+      body: Center(
+        // ignore: prefer_const_constructors
+        child: CircularProgressIndicator(
+          color: Colors.black,
+        ),
+      ),
+    ));
+  }
+}
+splashscreen
+
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers
+
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'loadingscreen.dart';
+
+class splashscreen extends StatefulWidget {
+  const splashscreen({Key? key}) : super(key: key);
+
+  @override
+  State<splashscreen> createState() => _splashscreenState();
+}
+
+class _splashscreenState extends State<splashscreen> {
+  @override
+  Widget build(BuildContext context) {
+    return (Scaffold(
+      backgroundColor: Color(0xfff012AC0),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              Expanded(
+                  flex: 3,
+                  child: Stack(
+                    children: [
+                      Container(
+                        child: Container(
+                          
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(),
+                            color: Color(0xfff012AC0),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            opacity: (0.3),
+                            image: AssetImage("assets/overlay.png"),
+                            fit: BoxFit.cover
+                          )
+                          
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                                child: Image.asset("assets/books.png")),
+                      ),
+                      
+                    ],
+                  )),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(50),
+                          topRight: Radius.circular(50))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                        child: Text(
+                          "Discover",
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                        child: Text(
+                          "new worlds !",
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                        child: Text(
+                          "Dive into new worlds with our application,",
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(color: Colors.grey[600])),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                        child: Text(
+                          "explore, study, follow the arrival of books,",
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(color: Colors.grey[600])),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                        child: Text(
+                          "get into good habbit of reading.",
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(color: Colors.grey[600])),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 35,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                        child: GestureDetector(
+                          onTap: (() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                var l = [
+                                  "mystery",
+                                  "fantasy",
+                                  "horror",
+                                  "romance"
+                                ];
+                                return loadingscreen(l: l);
+                              }),
+                            );
+                          }),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "EXPLORE",
+                                  style: GoogleFonts.lato(
+                                      textStyle: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w900)),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    ));
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
